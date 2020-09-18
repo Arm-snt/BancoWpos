@@ -22,6 +22,8 @@ const useStyles = makeStyles((theme) => ({
 
 function Usuario(props) {
   const context = useContext(Context);
+  //Este es un componente tipo card para tener la informacion del cliente a la mano
+  //ademas de tener a la vista el saldo en la cuenta
   const [nombre, setnombre]=useState();
   const [telefono, settelefono]=useState();
   const [saldo, setsaldo]=useState();

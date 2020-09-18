@@ -87,7 +87,8 @@ export default function Pagina(onchangeTab) {
 		setValue(index);
 		setData(data);
 	};
-
+   //Este es mi componente contenedor, aqui tengo las 2 ventanas a mis otros componentes asi como le paso las propiedades
+   //de mi contextprovider
 	return (
 		<Fragment>
 			<Container className={classes.container} component="main" maxWidth="lg" justify="center">

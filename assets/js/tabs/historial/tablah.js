@@ -60,7 +60,9 @@ const style = {
 };
 
 function TablaH(props){
-	const context = useContext(Context);
+	const context = useContext(Context); 
+	//con el uso del context traigo la informacion de la consulta sobre las transacciones de un cliente y
+	//asi puedo mapear toda esa informacion en una tabla mas abajo
 	const [ page, setPage ] = React.useState(0);
 	const [ rowsPerPage, setRowsPerPage ] = React.useState(5);
 

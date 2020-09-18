@@ -9,6 +9,10 @@ const style = {
 	}
 };
 
+//En los copntroladores luego de realizar alguna consulta, devuelvo un archivo tipo json donde
+//devuelvo un objeto mensaje que es con el cual abro este snackbar y asu vez le asigno niveles
+//para diferenciar su importancia
+
 function checkLevel(level) {
 	switch (level) {
 		case 'success':

@@ -70,7 +70,6 @@ class TransaccionController extends AbstractController
             $transaccion = $this->transaccionRepository->BuscarTransaccion($codigo_transaccion);
             $cuenta = $this->transaccionRepository->BuscarCuenta($numero_cuenta);
             $saldo = $cuenta['saldo'];
-            //$todo = $this->usuarioRepository->Mostrar();
             if($codigo_tipo_t==10){
                 $nuevo_saldo = $saldo + $monto;
             }else if($codigo_tipo_t==20){

@@ -50,6 +50,8 @@ export default function SignIn() {
   const [password, setpassword] = useState('');
   const history = useHistory();
 
+  //Metodo secreto y prohibido de "acceso" al sistema
+  //Utilizo un metodo history para saltar a la otra pagina
   const onSubmit = (event)=>{
     event.preventDefault();
     if(correo=='armandosantana.a1@gmail.com' && password=='writeARMAN1'){

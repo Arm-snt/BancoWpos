@@ -74,6 +74,8 @@ export default function Registro() {
 				text: [ 'Debe llenar todos los campos del formulario' ]
 			});
 		}
+		//Atravez de la constante context invoco los metodos para crear al cliente y envio los
+		//campos necesarios para generar su cuenta y sus credenciales de acceso
 		context.createCliente(event, {
 			documento: documento,
 			nombre_cliente: nombre,

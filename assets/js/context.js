@@ -4,6 +4,10 @@ import axios from 'axios';
 
 export const Context = createContext();
 
+//El componente context lo utilizo para almacenar las diferentes llamadas o consultas a la BD las cuales
+//las hago por axios y con la respuesta de la consulta la asigno como un estado para poder acceder a esa informacion
+//desde otros componentes
+
 class ContextProvider extends Component {
 
     constructor(props){

@@ -9,13 +9,15 @@ import Login from './registro/login'
 import Registro from './registro/contextPro'
 import Pagina from './tabs/pagina'
 
+//Esta es mi funcion indice la utilizo para asignar rutas a los componentes
+//Registro es mi pagina de inicio ya que cambie la ruta en el controldaor indice
 function App(props){
     return(
         <Router>
 			<MuiThemeProvider theme={theme}>
 				<Grid container>
 					<Switch>
-						<Route path="/" exact component={Registro} />
+						<Route path="/" exact component={Registro} /> 
 						<Route path="/Login" component={Login} />
 						<Route path="/Pagina" component={Pagina} />
 					</Switch>

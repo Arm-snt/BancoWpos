@@ -47,6 +47,8 @@ const style = {
 };
 
 function Transaccion() {
+	//Com,ponente de transacciones donde realizo las tres transacciones basicas
+	//Basado en el tipo_transaccion el saldo es actualizado respecto al monto
 	const context = useContext(Context);
 	let numero = Math.floor(Math.random() * (9999999999 - 1111111111 + 1)) + 1111111111;
 	const [ numerocuenta, setnumerocuenta ] = useState(context.cliente.numero_cuenta);
@@ -60,6 +62,8 @@ function Transaccion() {
 	
 	const onCreateSubmit = (event) => {
 		event.preventDefault();
+		//estas son pequeñas validaciones sobre los estados, como: si esta al gun campo vacio devuelva el snackbar
+		//o si por ejemplo se piensa hacer un retirp y el monto es mayor que el saldo disponible
 		if (numerocuenta == '' || monto == '' || codigo_transaccion == '' || tipo_transaccion == '') {
 			return context.setMessage({
 				level: 'error',
