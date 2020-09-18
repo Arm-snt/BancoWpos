@@ -48,7 +48,7 @@ const style = {
 	},
 	tableHead: {
 		color: '#ffffff',
-		backgroundColor: '#E2001A'
+		backgroundColor: '#27C497'
 	},
 	tableCell: {
 		color: '#ffffff'
@@ -60,22 +60,27 @@ const style = {
 };
 
 function TablaH(props){
-	const context_t = useContext(Context);
-	console.log(context_t.transaccion);
-	const context = 
-	[{'codigotransaccion':'245665','tipotransaccion':'Retiro','monto':'300000','fecha':'12/09/2020'},
-	{'codigotransaccion':'908654','tipotransaccion':'Retiro','monto':'10000','fecha':'15/09/2020'},
-	{'codigotransaccion':'799475','tipotransaccion':'Deposito','monto':'22000','fecha':'17/09/2020'},
-	{'codigotransaccion':'298403','tipotransaccion':'Transferencia','monto':'15000','fecha':'19/09/2020'},
-	{'codigotransaccion':'075888','tipotransaccion':'Retiro','monto':'134000','fecha':'24/09/2020'},
-	{'codigotransaccion':'198737','tipotransaccion':'Deposito','monto':'22500','fecha':'30/09/2020'}]
+	const context = useContext(Context);
+	const [ page, setPage ] = React.useState(0);
+	const [ rowsPerPage, setRowsPerPage ] = React.useState(5);
+
+	const emptyRows = rowsPerPage - Math.min(rowsPerPage, context.transaccion.length - page * rowsPerPage);
+	const handleChangePage = (event, newPage) => {
+		setPage(newPage);
+	};
+
+	const handleChangeRowsPerPage = (event) => {
+		setRowsPerPage(parseInt(event.target.value, 10));
+		setPage(0);
+	};
 
     return (
+		<Fragment>
 			<TableContainer component={Paper} style={style.space}>
 				<Table style={style.table} aria-label="customized table">
 					<TableHead style={style.tableHead}>
 						<TableRow>
-							<TableCell style={style.tableCell} align="center">
+							<TableCell style={style.tableCell} align="left">
                                 Codigo Transacción
                             </TableCell>
                             <TableCell style={style.tableCell} align="center">
@@ -90,25 +95,36 @@ function TablaH(props){
                         </TableRow>
                     </TableHead>
                     <TableBody>
-						{context.map((transaccion, index) => (
+						{context.transaccion.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((transaccion, index) => (
 							<TableRow key={'transaccion' + index}>
-								<TableCell>
-									<Typography>{transaccion.codigotransaccion}</Typography>
+								<TableCell align="left">
+									<Typography>{transaccion.codigo_transaccion}</Typography>
 								</TableCell>
-								<TableCell>
-									<Typography>{transaccion.tipotransaccion}</Typography>	
+								<TableCell align="center">
+									<Typography>{transaccion.codigo_tipo_t +"-"+transaccion.nombre_transaccion}</Typography>	
 								</TableCell>
-								<TableCell>
+								<TableCell align="center">
 									<Typography>{"$ "+transaccion.monto}</Typography>
 								</TableCell>
-								<TableCell>
-									<Typography>{transaccion.fecha}</Typography>
+								<TableCell align="center">
+									<Typography>{transaccion.fecha_transaccion}</Typography>
 								</TableCell>
 							</TableRow>
 						))}
                     </TableBody>
                 </Table>
             </TableContainer>
+				<TablePagination
+					rowsPerPageOptions={[ 5, 10, 25 ]}
+					component="div"
+					count={context.transaccion.length}
+					rowsPerPage={rowsPerPage}
+					page={page}
+					onChangePage={handleChangePage}
+					onChangeRowsPerPage={handleChangeRowsPerPage}
+				/>
+		</Fragment>
+			
     );
 }
 export default TablaH;

@@ -5,6 +5,7 @@ import { Table, TableHead, TableRow, TableCell, TableBody, TableContainer, TextF
 import Typography from "@material-ui/core/Typography";
 import { Container, Paper } from "@material-ui/core";
 import user from '../../../imagenes/user_m.png';
+import {Context} from '../../context';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,9 +20,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Usuario() {
+function Usuario(props) {
+  const context = useContext(Context);
+  const [nombre, setnombre]=useState();
+  const [telefono, settelefono]=useState();
+  const [saldo, setsaldo]=useState();
+  const [direccion, setdireccion]=useState();
   const style = useStyles();
-  let saldo = 1000000;
   return (
     <Fragment>
       <Grid container spacing={2}>
@@ -33,13 +38,13 @@ function Usuario() {
             />
           </div>
         </Grid>
-        <Grid item md={4} xs={6}>
-          <TextField type="text" value="Armando Santana" fullwidth="true" disabled label="Nombre del cliente" />
-          <TextField type="text" value="3022337899" fullwidth="true" disabled label="Telefono" />
+        <Grid item md={4} xs={6} className={style.info}>
+          <TextField type="text" value={context.cliente.nombre_cliente+" "+context.cliente.apellido_cliente} fullwidth="true" disabled label="Nombre del cliente" />
+          <TextField type="text" value="3022551956" fullwidth="true" disabled label="Telefono" />
         </Grid>
-        <Grid item md={4} xs={6}>
-          <TextField type="text" value={"$"+saldo} fullwidth="true" disabled label="Saldo" />
-          <TextField type="text" value="Cra 11B 45-33" fullwidth="true" disabled label="Dirección" />
+        <Grid item md={4} xs={6} className={style.info}>
+          <TextField type="text" value={"$"+context.cliente.saldo} fullwidth="true" disabled label="Saldo" />
+          <TextField type="text" value="Cra 11b 6a-33" fullwidth="true" disabled label="Dirección" />
         </Grid>
       </Grid>
     </Fragment>

@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Entity;
-
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -19,14 +20,14 @@ class Transaccion
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $codigoTransaccion;
+    private $codigo_transaccion;
 
     /**
      * @var int|null
      *
      * @ORM\Column(name="numero_cuenta_d", type="bigint", nullable=true, options={"default"="NULL"})
      */
-    private $numeroCuentaD = 'NULL';
+    private $numero_cuenta_d = 'NULL';
 
     /**
      * @var float
@@ -40,7 +41,7 @@ class Transaccion
      *
      * @ORM\Column(name="fecha_transaccion", type="date", nullable=false)
      */
-    private $fechaTransaccion;
+    private $fecha_transaccion;
 
     /**
      * @var \TipoTransaccion
@@ -50,7 +51,7 @@ class Transaccion
      *   @ORM\JoinColumn(name="codigo_tipo_t", referencedColumnName="codigo_tipo_t")
      * })
      */
-    private $codigoTipoT;
+    private $codigo_tipo_t;
 
     /**
      * @var \Cuenta
@@ -60,21 +61,21 @@ class Transaccion
      *   @ORM\JoinColumn(name="numero_cuenta", referencedColumnName="numero_cuenta")
      * })
      */
-    private $numeroCuenta;
+    private $numero_cuenta;
 
     public function getCodigoTransaccion(): ?string
     {
-        return $this->codigoTransaccion;
+        return $this->codigo_transaccion;
     }
 
     public function getNumeroCuentaD(): ?string
     {
-        return $this->numeroCuentaD;
+        return $this->numero_cuenta_d;
     }
 
-    public function setNumeroCuentaD(?string $numeroCuentaD): self
+    public function setNumeroCuentaD(?string $numero_cuenta_d): self
     {
-        $this->numeroCuentaD = $numeroCuentaD;
+        $this->numero_cuenta_d = $numero_cuenta_d;
 
         return $this;
     }
@@ -93,24 +94,24 @@ class Transaccion
 
     public function getFechaTransaccion(): ?\DateTimeInterface
     {
-        return $this->fechaTransaccion;
+        return $this->fecha_transaccion;
     }
 
     public function setFechaTransaccion(\DateTimeInterface $fechaTransaccion): self
     {
-        $this->fechaTransaccion = $fechaTransaccion;
+        $this->fecha_transaccion = $fecha_transaccion;
 
         return $this;
     }
 
     public function getCodigoTipoT(): ?TipoTransaccion
     {
-        return $this->codigoTipoT;
+        return $this->codigo_tipo_t;
     }
 
     public function setCodigoTipoT(?TipoTransaccion $codigoTipoT): self
     {
-        $this->codigoTipoT = $codigoTipoT;
+        $this->codigo_tipo_t = $codigo_tipo_t;
 
         return $this;
     }
@@ -120,9 +121,9 @@ class Transaccion
         return $this->numeroCuenta;
     }
 
-    public function setNumeroCuenta(?Cuenta $numeroCuenta): self
+    public function setNumeroCuenta(?Cuenta $numero_cuenta): self
     {
-        $this->numeroCuenta = $numeroCuenta;
+        $this->numero_cuenta = $numero_cuenta;
 
         return $this;
     }

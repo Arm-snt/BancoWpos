@@ -9,31 +9,70 @@ class ContextProvider extends Component {
     constructor(props){
         super(props);
         this.state ={
-            transaccion: [],
+			transaccion: [],
+			cliente:[],
+			message: {},
         }
         this.readTransacciones();
+        this.readCliente();
     }
 
     //Read transacciones
     readTransacciones() {
 		axios
-			.get('api/transaccion/read')
-			.then((response) => {
-                console.log(response.data);
-				this.setState({
+		.get('/api/transaccion/read')
+		.then((response) => {
+			this.setState({
 					transaccion: response.data
 				});
 			})
 			.catch((error) => {
-				console.error(error);
+				console.log(error);
 			});
-    }
+	}
+
+	readCliente() {
+		axios
+		.get('/api/transaccion/readCliente')
+		.then((response) => {
+			this.setState({
+					cliente: response.data
+				});
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+	}
 
     //Create Transacciones
     createTransacciones(event, data) {
 		event.preventDefault();
 		axios
-			.post('api/transaccion/create', data)
+			.post('/api/transaccion/create', data)
+			.then((response) => {
+				if (response.data.message.level === 'success') {
+					let transaccion = [ ...this.state.transaccion ];
+					transaccion.push(response.data.transaccion);
+					this.setState({
+						transaccion: transaccion,
+						cliente: response.data.cliente,
+						message: response.data.message
+					});
+				} else {
+					this.setState({
+						message: response.data.message
+					});
+				}
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+	}
+
+	createCliente(event, data) {
+		event.preventDefault();
+		axios
+			.post('/api/transaccion/createCliente', data)
 			.then((response) => {
 				if (response.data.message.level === 'success') {
 					let transaccion = [ ...this.state.transaccion ];
@@ -62,6 +101,7 @@ class ContextProvider extends Component {
 					//updatePrestamoEle: this.updatePrestamoEle.bind(this),
 					//deleteTodo: this.deleteTodo.bind(this),
 					createTransacciones: this.createTransacciones.bind(this),
+					createCliente: this.createCliente.bind(this),
 					setMessage: (message) => this.setState({ message: message })
 				}}>
 				{this.props.children}

@@ -16,4 +16,12 @@ class IndexController extends AbstractController
             'controller_name' => 'IndexController',
         ]);
     }
+    /**
+     * @Route("/{ruta}", name="index2")
+     */
+    public function index2(){
+        return $this->render('index/index.html.twig', [
+            'controller_name' => 'IndexController',
+        ]);
+    }
 }
